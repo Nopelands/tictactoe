@@ -133,67 +133,6 @@ public class game {
         }
         return win;
     }
-
-    private static int cpu_play_hard(String[][] board, int move_number) {
-        if (move_number == 0) {
-            place_on_board("X", 1, board);
-        } else if (move_number == 1) {
-            if (!board[2][2].equals("O")) {
-                if (!board[1][2].equals("O") && !board[1][3].equals("O")) {
-                    place_on_board("X", 3, board);
-                    board[0][0] = "☠";
-                } else {
-                    place_on_board("X", 7, board);
-                    board[0][0] = "☠";
-                }
-            } /*else {
-
-            } */
-        } else if (move_number == 2) {
-            if (board[0][0].equals("☠")) {
-                if (board[1][3].equals("X")) {
-                    if (!board[1][2].equals("O")) {
-                        place_on_board("X", 2, board);
-                    } else {
-                        if (!board[3][3].equals("O")) {
-                            place_on_board("X", 9, board);
-                        } else {
-                            place_on_board("X", 7, board);
-                        }
-                    }
-                } else {
-                    if (!board[2][1].equals("O")) {
-                        place_on_board("X", 4, board);
-                    } else {
-                        if (!board[3][3].equals("O")) {
-                            place_on_board("X", 7, board);
-                        } else {
-                            place_on_board("X", 9, board);
-                        }
-                    }
-                }
-            } /* else {
-            } */
-        } else if (move_number == 3) {
-            if (board[0][0].equals("☠")) {
-                if (board[1][3].equals("X")) {
-                    if (board[2][2].equals("O")) {
-                        place_on_board("X", 6, board);
-                    } else {
-                        place_on_board("X", 5, board);
-
-                    }
-                } else {
-                    if (board[2][2].equals("O")) {
-                        place_on_board("X", 8, board);
-                    } else {
-                        place_on_board("X", 5, board);
-                    }
-                }
-            }
-        }
-        return move_number + 1;
-    }
     private static void cpu_play_easy(String[][] board) {
         int move = (int) (Math.random() * 9) + 1;
         while (!is_legal_move(move, board)) {
