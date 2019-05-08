@@ -38,6 +38,8 @@ public class game {
                                 hard = true;
                             }
                         }
+                        //TODO medium difficulty
+                        //TODO player selection
                         if (!hard) {
                             boolean stop = false;
                             while (!stop) {
