@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class game {
     public static void main(String[] args) {
@@ -6,7 +7,6 @@ public class game {
         //menu
         boolean quit = false;
         boolean hard = false;
-        Board board = new Board();
         while (!quit) {
             System.out.println("new game        -n\nquit            -q");
             boolean comando_menu_valido = false;
@@ -23,6 +23,7 @@ public class game {
                     case "n":
                     case "-n":
                         comando_menu_valido = true;
+                        Board board = new Board();
                         System.out.println("difficulty selection:\n\neasy            -e\nhard            -h");
                         boolean dificuldade_valida = false;
                         while (!dificuldade_valida) {
@@ -42,25 +43,28 @@ public class game {
                                 if (board.win_check("X")) {
                                     stop = true;
                                     System.out.println("CPU wins");
-                                }
-                                if (board.count_empty_spots().length == 0) {
-                                    System.out.println("draw");
-                                    break;
-                                }
-                                boolean valid_move;
-                                String player_move;
-                                player_move = in.nextLine();
-                                valid_move = board.is_legal_move(convert_notation(player_move));
-                                while (!valid_move) {
+                                } else if (board.count_empty_spots().length == 0) {
+                                    System.out.println("draw"); //TODO check draw loop
+                                    stop = true;
+                                } else {
+                                    boolean valid_move;
+                                    String player_move;
                                     player_move = in.nextLine();
                                     valid_move = board.is_legal_move(convert_notation(player_move));
-                                    System.out.println("illegal move");
-                                }
-                                board.place_on_board("O", convert_notation(player_move));
-                                board.print_board_state();
-                                if (board.win_check("O")) {
-                                    stop = true;
-                                    System.out.println("Player wins");
+                                    if (!valid_move) {
+                                        System.out.println("illegal move");
+                                    }
+                                    while (!valid_move) {
+                                        player_move = in.nextLine();
+                                        valid_move = board.is_legal_move(convert_notation(player_move));
+                                        System.out.println("illegal move");
+                                    }
+                                    board.place_on_board("O", convert_notation(player_move));
+                                    board.print_board_state();
+                                    if (board.win_check("O")) {
+                                        stop = true;
+                                        System.out.println("Player wins");
+                                    }
                                 }
                             }
                         }
@@ -73,9 +77,10 @@ public class game {
     //TODO cpu_play_hard
     //TODO minimax
     private static void cpu_play_easy(Board board) {
-        int move = (int) (Math.random() * 9) + 1;
+        int move = ThreadLocalRandom.current().nextInt(1, 10);
+
         while (!board.is_legal_move(move)) {
-            move = (int) (Math.random() * 9) + 1;
+            move = ThreadLocalRandom.current().nextInt(0, 10);
         }
         board.place_on_board("X", move);
     }
