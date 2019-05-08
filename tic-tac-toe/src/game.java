@@ -6,6 +6,7 @@ public class game {
         //menu
         boolean quit = false;
         boolean hard = false;
+        Board board = new Board();
         while (!quit) {
             System.out.println("new game        -n\nquit            -q");
             boolean comando_menu_valido = false;
@@ -33,64 +34,8 @@ public class game {
                                 hard = true;
                             }
                         }
-                        String[][] board = {{"\\", "1", "2", "3"}, {"A", "*", "*", "*"}, {"B", "*", "*", "*"}, {"C", "*", "*", "*"}};
                         int jogadas = 0;
-                        if (!hard) {
-                            boolean stop = false;
-                            while (!stop) {
-                                cpu_play_easy(board);
-                                jogadas++;
-                                print_board_state(board);
-                                if (win_check("X", board)) {
-                                    System.out.println("CPU wins");
-                                    stop = true;
-                                }
-                                if (!stop && jogadas == 9) {
-                                    System.out.println("draw\n");
-                                    break;
-                                }
-                                String player_move = in.next();
-                                while (!is_legal_move(convert_notation(player_move), board)) {
-                                    System.out.println("illegal move");
-                                    player_move = in.next();
-                                }
-                                jogadas++;
-                                place_on_board("O", convert_notation(player_move), board);
-                                print_board_state(board);
-                                if (win_check("O", board)) {
-                                    System.out.println("Player wins");
-                                    stop = true;
-                                }
-                            }
-                        } else {
-                            int move_number = 0;
-                            boolean stop = false;
-                            while (!stop) {
-                                move_number = cpu_play_hard(board, move_number);
-                                jogadas++;
-                                print_board_state(board);
-                                if (win_check("X", board)) {
-                                    System.out.println("CPU wins");
-                                    stop = true;
-                                }
-                                if (!stop && jogadas == 9) {
-                                    System.out.println("draw\n");
-                                    break;
-                                }
-                                String player_move = in.next();
-                                while (!is_legal_move(convert_notation(player_move), board)) {
-                                    System.out.println("illegal move");
-                                    player_move = in.next();
-                                }
-                                jogadas++;
-                                place_on_board("O", convert_notation(player_move), board);
-                                print_board_state(board);
-                                if (win_check("O", board)) {
-                                    System.out.println("Player wins");
-                                    stop = true;
-                                }
-                            }
-                        }
+                        //TODO game here
                         break;
                     case "step up":
                         comando_menu_valido = true;
@@ -110,28 +55,6 @@ public class game {
                 }
             }
         }
-    }
-
-    private static boolean win_check(String player, String[][] board) {
-        boolean win = false;
-        if (board[1][1].equals(player) && board[1][2].equals(player) && board[1][3].equals(player)) {
-            win = true;
-        } else if (board[2][1].equals(player) && board[2][2].equals(player) && board[2][3].equals(player)) {
-            win = true;
-        } else if (board[3][1].equals(player) && board[3][2].equals(player) && board[3][3].equals(player)) {
-            win = true;
-        } else if (board[1][1].equals(player) && board[2][1].equals(player) && board[3][1].equals(player)) {
-            win = true;
-        } else if (board[1][2].equals(player) && board[2][2].equals(player) && board[3][2].equals(player)) {
-            win = true;
-        } else if (board[1][3].equals(player) && board[2][3].equals(player) && board[3][3].equals(player)) {
-            win = true;
-        } else if (board[1][1].equals(player) && board[2][2].equals(player) && board[3][3].equals(player)) {
-            win = true;
-        } else if (board[1][3].equals(player) && board[2][2].equals(player) && board[3][1].equals(player)) {
-            win = true;
-        }
-        return win;
     }
     private static void cpu_play_easy(String[][] board) {
         int move = (int) (Math.random() * 9) + 1;
@@ -194,7 +117,7 @@ public class game {
         }
     }
 
-    public class board {
+    public static class Board {
         private String[] board_state = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
         public String[] get_board_state() {
@@ -218,6 +141,17 @@ public class game {
         }
         public void place_on_board(String player_type, int location, String[] board) {
             board[location] = player_type;
+        }
+
+        public boolean win_check(String player) {
+            return (board_state[0].equals(player) && board_state[1].equals(player) && board_state[2].equals(player)) ||
+                    (board_state[3].equals(player) && board_state[4].equals(player) && board_state[5].equals(player)) ||
+                    (board_state[6].equals(player) && board_state[7].equals(player) && board_state[8].equals(player)) ||
+                    (board_state[0].equals(player) && board_state[3].equals(player) && board_state[6].equals(player)) ||
+                    (board_state[1].equals(player) && board_state[4].equals(player) && board_state[7].equals(player)) ||
+                    (board_state[2].equals(player) && board_state[5].equals(player) && board_state[8].equals(player)) ||
+                    (board_state[0].equals(player) && board_state[4].equals(player) && board_state[8].equals(player)) ||
+                    (board_state[2].equals(player) && board_state[4].equals(player) && board_state[6].equals(player));
         }
     }
 }
