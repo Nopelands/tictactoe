@@ -20,14 +20,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tic-tac-toe/src/game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="66" column="35" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
+            <state relative-caret-position="317">
+              <caret line="104" column="5" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
               <folding>
                 <element signature="e#1668#1731#1" />
-                <element signature="e#1766#2427#0" />
                 <element signature="method#cpu_play_easy#0;class#game#0" />
                 <element signature="method#convert_notation#0;class#game#0" />
-                <element signature="method#sleep#0;class#game#0" />
                 <element signature="method#is_integer#0;class#game#0" />
                 <element signature="class#board#0;class#game#0" />
                 <element signature="method#count_empty_spots#0;class#Board#0;class#game#0" />
@@ -126,7 +124,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1557261264850</updated>
-      <workItem from="1557261272252" duration="5749000" />
+      <workItem from="1557261272252" duration="5960000" />
     </task>
     <task id="LOCAL-00001" summary="a">
       <created>1557261543871</created>
@@ -156,11 +154,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557285809953</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="a">
+      <created>1557285871801</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1557285871801</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5749000" />
+    <option name="totallyTimeSpent" value="5960000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -226,14 +231,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/tic-tac-toe/src/game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="66" column="35" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
+        <state relative-caret-position="317">
+          <caret line="104" column="5" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
           <folding>
             <element signature="e#1668#1731#1" />
-            <element signature="e#1766#2427#0" />
             <element signature="method#cpu_play_easy#0;class#game#0" />
             <element signature="method#convert_notation#0;class#game#0" />
-            <element signature="method#sleep#0;class#game#0" />
             <element signature="method#is_integer#0;class#game#0" />
             <element signature="class#board#0;class#game#0" />
             <element signature="method#count_empty_spots#0;class#Board#0;class#game#0" />

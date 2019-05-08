@@ -66,25 +66,12 @@ public class game {
                         }
                         //TODO hard here
                         break;
-                    /*case "step up":
-                        comando_menu_valido = true;
-                        System.out.print("New Game wa Now Loading");
-                        for (int i = 0; i < 3; i++) {
-                            sleep(3000);
-                            System.out.print(".");
-                        }
-                        sleep(1000);
-                        System.out.println("Now Loading!");
-                        sleep(5000);
-                        System.out.println("Now Complete!");
-                        break;
-                    default:
-                        System.out.println("unknown command");
-                        break;*/
                 }
             }
         }
     }
+    //TODO cpu_play_hard
+    //TODO minimax
     private static void cpu_play_easy(Board board) {
         int move = (int) (Math.random() * 9) + 1;
         while (!board.is_legal_move(move)) {
@@ -114,13 +101,6 @@ public class game {
                 return 8;
             default:
                 return 999;
-        }
-    }
-    private static void sleep(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
         }
     }
     private static boolean is_integer(String input) {
