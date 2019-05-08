@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e13c404c-e03f-4f63-973b-166c13921da9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tic-tac-toe/src/game.java" beforeDir="false" afterPath="$PROJECT_DIR$/tic-tac-toe/src/game.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -21,18 +20,18 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tic-tac-toe/src/game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="56" column="68" selection-start-line="56" selection-start-column="68" selection-end-line="56" selection-end-column="68" />
+            <state relative-caret-position="135">
+              <caret line="66" column="35" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
               <folding>
+                <element signature="e#1668#1731#1" />
                 <element signature="e#1766#2427#0" />
                 <element signature="method#cpu_play_easy#0;class#game#0" />
                 <element signature="method#convert_notation#0;class#game#0" />
                 <element signature="method#sleep#0;class#game#0" />
                 <element signature="method#is_integer#0;class#game#0" />
+                <element signature="class#board#0;class#game#0" />
                 <element signature="method#count_empty_spots#0;class#Board#0;class#game#0" />
                 <element signature="method#is_legal_move#0;class#board#0;class#game#0" />
-                <element signature="e#11622#11623#0" expanded="true" />
-                <element signature="e#11675#11676#0" expanded="true" />
                 <element signature="method#win_check#0;class#Board#0;class#game#0" />
                 <element signature="method#print_board_state#0;class#Board#0;class#game#0" />
               </folding>
@@ -127,7 +126,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1557261264850</updated>
-      <workItem from="1557261272252" duration="5380000" />
+      <workItem from="1557261272252" duration="5749000" />
     </task>
     <task id="LOCAL-00001" summary="a">
       <created>1557261543871</created>
@@ -143,11 +142,25 @@
       <option name="project" value="LOCAL" />
       <updated>1557282351613</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="a">
+      <created>1557285550519</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1557285550519</updated>
+    </task>
+    <task id="LOCAL-00004" summary="a">
+      <created>1557285809953</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1557285809953</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5380000" />
+    <option name="totallyTimeSpent" value="5749000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -167,7 +180,7 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
@@ -213,18 +226,18 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/tic-tac-toe/src/game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="56" column="68" selection-start-line="56" selection-start-column="68" selection-end-line="56" selection-end-column="68" />
+        <state relative-caret-position="135">
+          <caret line="66" column="35" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
           <folding>
+            <element signature="e#1668#1731#1" />
             <element signature="e#1766#2427#0" />
             <element signature="method#cpu_play_easy#0;class#game#0" />
             <element signature="method#convert_notation#0;class#game#0" />
             <element signature="method#sleep#0;class#game#0" />
             <element signature="method#is_integer#0;class#game#0" />
+            <element signature="class#board#0;class#game#0" />
             <element signature="method#count_empty_spots#0;class#Board#0;class#game#0" />
             <element signature="method#is_legal_move#0;class#board#0;class#game#0" />
-            <element signature="e#11622#11623#0" expanded="true" />
-            <element signature="e#11675#11676#0" expanded="true" />
             <element signature="method#win_check#0;class#Board#0;class#game#0" />
             <element signature="method#print_board_state#0;class#Board#0;class#game#0" />
           </folding>
