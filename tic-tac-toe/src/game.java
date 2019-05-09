@@ -33,6 +33,7 @@ public class game {
                             String dificuldade = in.nextLine();
                             if (dificuldade.equals("easy") || dificuldade.equals("e") || dificuldade.equals("-e")) {
                                 dificuldade_valida = true;
+                                hard = false;
                             } else if (dificuldade.equals("hard") || dificuldade.equals("h") || dificuldade.equals("-h")) {
                                 dificuldade_valida = true;
                                 hard = true;
