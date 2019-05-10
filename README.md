@@ -1,2 +1,5 @@
 # tictactoe
-hard mode should use minimax algorithm
+probably going to add medium difficulty and player selection
+
+
+next step > UI

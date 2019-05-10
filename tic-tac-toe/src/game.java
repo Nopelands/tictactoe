@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class game {
     public static void main(String[] args) {
@@ -6,7 +10,6 @@ public class game {
         //menu
         boolean quit = false;
         boolean hard = false;
-        Board board = new Board();
         while (!quit) {
             System.out.println("new game        -n\nquit            -q");
             boolean comando_menu_valido = false;
@@ -23,17 +26,21 @@ public class game {
                     case "n":
                     case "-n":
                         comando_menu_valido = true;
+                        Board board = new Board();
                         System.out.println("difficulty selection:\n\neasy            -e\nhard            -h");
                         boolean dificuldade_valida = false;
                         while (!dificuldade_valida) {
                             String dificuldade = in.nextLine();
                             if (dificuldade.equals("easy") || dificuldade.equals("e") || dificuldade.equals("-e")) {
                                 dificuldade_valida = true;
+                                hard = false;
                             } else if (dificuldade.equals("hard") || dificuldade.equals("h") || dificuldade.equals("-h")) {
                                 dificuldade_valida = true;
                                 hard = true;
                             }
                         }
+                        //TODO medium difficulty
+                        //TODO player selection
                         if (!hard) {
                             boolean stop = false;
                             while (!stop) {
@@ -42,40 +49,132 @@ public class game {
                                 if (board.win_check("X")) {
                                     stop = true;
                                     System.out.println("CPU wins");
-                                }
-                                if (board.count_empty_spots().length == 0) {
+                                } else if (board.count_empty_spots().length == 0) {
                                     System.out.println("draw");
-                                    break;
-                                }
-                                boolean valid_move;
-                                String player_move;
-                                player_move = in.nextLine();
-                                valid_move = board.is_legal_move(convert_notation(player_move));
-                                while (!valid_move) {
+                                    stop = true;
+                                } else {
+                                    boolean valid_move;
+                                    String player_move;
                                     player_move = in.nextLine();
                                     valid_move = board.is_legal_move(convert_notation(player_move));
-                                    System.out.println("illegal move");
-                                }
-                                board.place_on_board("O", convert_notation(player_move));
-                                board.print_board_state();
-                                if (board.win_check("O")) {
-                                    stop = true;
-                                    System.out.println("Player wins");
+                                    if (!valid_move) {
+                                        System.out.println("illegal move");
+                                    }
+                                    while (!valid_move) {
+                                        player_move = in.nextLine();
+                                        valid_move = board.is_legal_move(convert_notation(player_move));
+                                        System.out.println("illegal move");
+                                    }
+                                    board.place_on_board("O", convert_notation(player_move));
+                                    board.print_board_state();
+                                    if (board.win_check("O")) {
+                                        stop = true;
+                                        System.out.println("Player wins");
+                                    }
                                 }
                             }
+                        } else {
+                            boolean stop = false;
+                            while (!stop) {
+                                cpu_play_hard(board);
+                                board.print_board_state();
+                                if (board.win_check("X")) {
+                                    stop = true;
+                                    System.out.println("CPU wins");
+                                } else if (board.count_empty_spots().length == 0) {
+                                    System.out.println("draw");
+                                    stop = true;
+                                } else {
+                                    boolean valid_move;
+                                    String player_move;
+                                    player_move = in.nextLine();
+                                    valid_move = board.is_legal_move(convert_notation(player_move));
+                                    if (!valid_move) {
+                                        System.out.println("illegal move");
+                                    }
+                                    while (!valid_move) {
+                                        player_move = in.nextLine();
+                                        valid_move = board.is_legal_move(convert_notation(player_move));
+                                        System.out.println("illegal move");
+                                    }
+                                    board.place_on_board("O", convert_notation(player_move));
+                                    board.print_board_state();
+                                    if (board.win_check("O")) {
+                                        stop = true;
+                                        System.out.println("Player wins");
+                                    }
+                                }
+                            }
+
                         }
-                        //TODO hard here
                         break;
                 }
             }
         }
     }
-    //TODO cpu_play_hard
-    //TODO minimax
+
+    private static void cpu_play_hard(Board board) {
+        HashMap<String, Integer> answer;
+        answer = minimax(board, "X");
+        int move = Integer.parseInt(answer.get("index").toString());
+        board.place_on_board("X", move);
+    }
+    private static HashMap minimax(Board board, String player) {
+        String[] function_board = board.get_board_state();
+        Board new_board = new Board(function_board);
+        int[] empty_spaces = board.count_empty_spots();
+        if (empty_spaces.length == 0) {
+            HashMap<String,Integer> move = new HashMap<>();
+            move.put("score", 0);
+            return move;
+        } else if (new_board.win_check("X")) {
+            HashMap<String,Integer> move = new HashMap<>();
+            move.put("score", 10);
+            return move;
+        } else if (new_board.win_check("O")) {
+            HashMap<String,Integer> move = new HashMap<>();
+            move.put("score", -10);
+            return move;
+        }
+        ArrayList<HashMap> possibilities = new ArrayList<>();
+        for (int empty_space : empty_spaces) {
+            HashMap<String, Integer> move = new HashMap<>();
+            move.put("index", Integer.parseInt(new_board.get_field(empty_space)));
+            new_board.place_on_board(player, empty_space);
+            if (player.equals("X")) {
+                move.put("score", Integer.parseInt(minimax(new_board, "O").get("score").toString()));
+            } else {
+                move.put("score", Integer.parseInt(minimax(new_board, "X").get("score").toString()));
+            }
+            Integer fill = empty_space;
+            new_board.place_on_board(fill.toString(), fill);
+            possibilities.add(move);
+        }
+        int best_move = 0;
+        if (player.equals("X")) {
+            int best_score = Integer.MIN_VALUE;
+            for (int i = 0; i < possibilities.size(); i++) {
+                if (Integer.parseInt(possibilities.get(i).get("score").toString()) > best_score) {
+                    best_score = Integer.parseInt(possibilities.get(i).get("score").toString());
+                    best_move = i;
+                }
+            }
+        } else {
+            int best_score = Integer.MAX_VALUE;
+            for (int i = 0; i < possibilities.size(); i++) {
+                if (Integer.parseInt(possibilities.get(i).get("score").toString()) < best_score) {
+                    best_score = Integer.parseInt(possibilities.get(i).get("score").toString());
+                    best_move = i;
+                }
+            }
+        }
+        return possibilities.get(best_move);
+    }
     private static void cpu_play_easy(Board board) {
-        int move = (int) (Math.random() * 9) + 1;
+        int move = ThreadLocalRandom.current().nextInt(1, 10);
+
         while (!board.is_legal_move(move)) {
-            move = (int) (Math.random() * 9) + 1;
+            move = ThreadLocalRandom.current().nextInt(0, 10);
         }
         board.place_on_board("X", move);
     }
@@ -113,33 +212,32 @@ public class game {
     }
 
     public static class Board {
-        private String[] board_state = {"0", "1", "2", "3", "4", "5", "6", "7", "8"};
+        private String[] board_state;
 
+        public Board(String[] board_state) {
+            this.board_state = board_state;
+        }
+        public Board() {
+            this.board_state = new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8"};
+        }
         public String[] get_board_state() {
             return board_state;
         }
 
         public int[] count_empty_spots() {
-            int empty_count = 0;
-            for (int i = 0; i < 9; i++) {
-                if (is_integer(board_state[i])) {
-                    empty_count++;
+            ArrayList<Integer> resposta = new ArrayList();
+            for (String s : board_state) {
+                if (is_integer(s)) {
+                    resposta.add(Integer.parseInt(s));
                 }
             }
-            if (empty_count > 0) {
-                int[] answer = new int[empty_count];
-                for (int j = 0; j < empty_count; j++) {
-                    for (int i = 0; i < 9; i++) {
-                        if (is_integer(board_state[i])) {
-                            answer[j] = i;
-                            break;
-                        }
-                    }
-                }
-                return answer;
-            } else {
-                return new int[0];
+            int[] result = new int[resposta.size()];
+            Iterator<Integer> iterator = resposta.iterator();
+            for (int i = 0; i < result.length; i++)
+            {
+                result[i] = iterator.next();
             }
+            return result;
         }
 
         public boolean is_legal_move(int location) {
