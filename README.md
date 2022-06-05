@@ -1,5 +1,3 @@
 # tictactoe
-probably going to add medium difficulty and player selection
 
-
-next step > UI
+CLI java application for a tic tac toe AI that will either win or tie.
